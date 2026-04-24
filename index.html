@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КартПлейс - Услуги оформления</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="menu-trigger" onclick="toggleMenu()">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="menu-label">Категории</span>
+        </div>
+        <div class="cart-trigger" onclick="openCart()">
+            Корзина: <span id="header-total">0 ₽</span>
+        </div>
+    </header>
+
+    <!-- Боковое меню -->
+    <div class="menu-overlay" id="menu-overlay" onclick="closeMenu(event)">
+        <nav class="side-menu">
+            <button class="close-menu" onclick="toggleMenu()">&times;</button>
+            <div class="menu-section">
+                <h3>Отдельные услуги</h3>
+                <ul>
+                    <li><a href="#service-1">Обложка товара</a></li>
+                    <li><a href="#service-2">Инфографика</a></li>
+                    <li><a href="#service-3">SEO-описание</a></li>
+                    <li><a href="#service-4">Видеообложка</a></li>
+                    <li><a href="#service-5">Рич-контент</a></li>
+                    <li><a href="#service-6">Аудит карточки</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Пакеты</h3>
+                <ul>
+                    <li><a href="#service-7">Пакет «Старт»</a></li>
+                    <li><a href="#service-8">Пакет «Оптима»</a></li>
+                    <li><a href="#service-9">Пакет «Масштаб»</a></li>
+                </ul>
+            </div>
+            <div class="menu-section">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="portfolio.html">Портфолио</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Главный блок -->
+    <section class="hero">
+        <h1>КартПлейс</h1>
+        <p class="subtitle">
+            выбери <strong>слайд</strong>. выбери <strong>описание</strong>. выбери <strong>видеообложку</strong>.<br>
+            выбери два блока <strong>рич-контента</strong>. выбери <strong>включающий всё это пакет</strong>
+        </p>
+    </section>
+
+    <!-- Услуги -->
+    <main class="services-grid" id="services-container">
+        <!-- Заполняется через JS -->
+    </main>
+
+    <!-- Контакты -->
+    <section class="contacts-section" id="contacts">
+        <h2>Контакты</h2>
+        <div class="contacts-grid">
+            <div class="contact-card">
+                <h3>Telegram</h3>
+                <p>@ваш_ник</p>
+                <a href="https://t.me/ваш_ник" target="_blank" class="btn-contact">Написать</a>
+            </div>
+            <div class="contact-card">
+                <h3>Email</h3>
+                <p>email@example.com</p>
+                <a href="mailto:email@example.com" class="btn-contact">Отправить письмо</a>
+            </div>
+            <div class="contact-card">
+                <h3>Режим работы</h3>
+                <p>Пн–Пт: 10:00–19:00<br>Сб–Вс: выходной</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно корзины -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Корзина</h2>
+                <span class="close-modal" onclick="closeCart()">&times;</span>
+            </div>
+            <div class="modal-body" id="cart-items"></div>
+            <div class="modal-footer">
+                <div class="total-row">
+                    <span>Итого:</span>
+                    <span id="modal-total">0 ₽</span>
+                </div>
+                <button class="btn-checkout" onclick="checkout()" id="checkout-btn">Оформить в Telegram</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
