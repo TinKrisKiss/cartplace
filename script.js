@@ -3,15 +3,33 @@
 // но не используйте этого бота для важных личных переписок.
 const TG_BOT_TOKEN = '8653900483:AAGjQ5qhrX3odmnLQIndK5THOVPKWaxrcGY'; 
 
-// ВНИМАНИЕ: Замените это число на ВАШ личный ID (узнайте через @userinfobot)
-// Сейчас стоит ID бота, сообщения будут уходить в никуда.
 const TG_CHAT_ID = '748296626'; 
 
 // === ДАННЫЕ УСЛУГ (Обновленные цены) ===
 const services = [
-    { id: 1, name: 'Обложка товара', price: 2000, desc: 'Композиция, ретушь, фон, адаптив, 2 варианта, до 3 правок', type: 'covers' },
-    { id: 2, name: 'Инфографика (1 слайд)', price: 1500, desc: 'Визуализация преимуществ, иконки, схемы, адаптив, до 2 правок', type: 'infographics' },
-    { id: 3, name: 'SEO-описание', price: 2500, desc: 'Ключевые слова, структура, уникальность 90%+, до 1500 зн., до 2 правок', type: 'text' },
+    {   
+        id: 1, 
+        name: 'Обложка товара', 
+        price: 2000, 
+        desc: 'Композиция, ретушь, фон, адаптив, 2 варианта, до 3 правок', 
+        type: 'covers' 
+        image: 'images/services/cover-1.jpg' 
+    },
+    {   
+        id: 2, name: 'Инфографика (1 слайд)', 
+        price: 1500, 
+        desc: 'Визуализация преимуществ, иконки, схемы, адаптив, до 2 правок', 
+        type: 'infographics' 
+        image: 'images/services/cover-2.jpg' 
+    },
+    { 
+        id: 3, 
+        name: 'SEO-описание', 
+        price: 2500, 
+        desc: 'Ключевые слова, структура, уникальность 90%+, до 1500 зн., до 2 правок', 
+        type: 'text' 
+        image: 'images/services/cover-3.jpg' 
+    },
     { id: 4, name: 'Видеообложка', price: 4000, desc: 'Монтаж до 15 сек, ракурсы, субтитры, формат WB/Ozon, до 2 правок', type: 'video' },
     { id: 5, name: 'Рич-контент (1 блок)', price: 3500, desc: 'Структура, текст+визуал, адаптивная верстка, до 2 правок', type: 'rich' },
     { id: 6, name: 'Аудит карточки', price: 3000, desc: 'Анализ оформления, читаемости, требований, рекомендации, отчет', type: 'audit' },
@@ -62,7 +80,9 @@ function renderServices() {
         
         return `
             <div class="service-card" id="service-${s.id}">
-                <div class="card-visual">Превью</div>
+                <div class="card-visual">
+                    ${s.image ? `<img src="${s.image}" alt="${s.name}">` : 'Превью'}
+                </div>
                 <div class="card-body">
                     <div class="card-title">${s.name}</div>
                     <div class="card-price">${s.price.toLocaleString()} ₽</div>
