@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали услуги - КартПлейс</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="menu-trigger" onclick="window.location.href='index.html'">
+            <span class="back-arrow">←</span>
+            <span class="menu-label">На главную</span>
+        </div>
+        <div class="cart-trigger" onclick="openCart()">
+            Корзина: <span id="header-total">0 ₽</span>
+        </div>
+    </header>
+
+    <main class="service-detail-container" id="service-detail-content">
+        <!-- Контент загрузится автоматически через JS -->
+        <p style="text-align:center; padding:50px;">Загрузка...</p>
+    </main>
+
+    <!-- Модальное окно корзины (общее для всех страниц) -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Корзина</h2>
+                <span class="close-modal" onclick="closeCart()">&times;</span>
+            </div>
+            <div class="modal-body" id="cart-items"></div>
+            <div class="modal-footer">
+                <div class="total-row">
+                    <span>Итого:</span>
+                    <span id="modal-total">0 ₽</span>
+                </div>
+                <button class="btn-checkout" onclick="checkout()" id="checkout-btn">Оформить в Telegram</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
