@@ -1,44 +1,87 @@
 // === КОНФИГУРАЦИЯ ===
-// ВНИМАНИЕ: Токен виден в коде сайта. Это нормально для бесплатных сайтов, 
-// но не используйте этого бота для важных личных переписок.
 const TG_BOT_TOKEN = '8653900483:AAGjQ5qhrX3odmnLQIndK5THOVPKWaxrcGY'; 
+const TG_CHAT_ID = '748296626';
 
-const TG_CHAT_ID = '748296626'; 
-
-// === ДАННЫЕ УСЛУГ (Обновленные цены) ===
+// === ДАННЫЕ УСЛУГ ===
 const services = [
-    {   
+    { 
         id: 1, 
         name: 'Обложка товара', 
         price: 2000, 
         desc: 'Композиция, ретушь, фон, адаптив, 2 варианта, до 3 правок', 
-        type: 'covers' 
-        image: 'images/services/cover-1.jpg' 
+        type: 'covers',
+        image: 'images/services/cover-1.jpg'
     },
-    {   
-        id: 2, name: 'Инфографика (1 слайд)', 
+    { 
+        id: 2, 
+        name: 'Инфографика (1 слайд)', 
         price: 1500, 
         desc: 'Визуализация преимуществ, иконки, схемы, адаптив, до 2 правок', 
-        type: 'infographics' 
-        image: 'images/services/cover-2.jpg' 
+        type: 'infographics',
+        image: 'images/services/cover-2.jpg'
     },
     { 
         id: 3, 
         name: 'SEO-описание', 
         price: 2500, 
         desc: 'Ключевые слова, структура, уникальность 90%+, до 1500 зн., до 2 правок', 
-        type: 'text' 
-        image: 'images/services/cover-3.jpg' 
+        type: 'text',
+        image: 'images/services/cover-3.jpg'
     },
-    { id: 4, name: 'Видеообложка', price: 4000, desc: 'Монтаж до 15 сек, ракурсы, субтитры, формат WB/Ozon, до 2 правок', type: 'video' },
-    { id: 5, name: 'Рич-контент (1 блок)', price: 3500, desc: 'Структура, текст+визуал, адаптивная верстка, до 2 правок', type: 'rich' },
-    { id: 6, name: 'Аудит карточки', price: 3000, desc: 'Анализ оформления, читаемости, требований, рекомендации, отчет', type: 'audit' },
-    { id: 7, name: 'Пакет «Старт»', price: 8000, desc: '1 карточка полностью: обложка, 3 слайда, описание, рич-контент', type: 'complex', isPackage: true },
-    { id: 8, name: 'Пакет «Оптима»', price: 35000, desc: '5 карточек: обложки, 15 слайдов, описания, рич-контент, единый стиль', type: 'complex', isPackage: true },
-    { id: 9, name: 'Пакет «Масштаб»', price: 58000, desc: '8 карточек: полный цикл + 2 видеообложки, брендбук, приоритет, 5 дней', type: 'complex', isPackage: true }
+    { 
+        id: 4, 
+        name: 'Видеообложка', 
+        price: 4000, 
+        desc: 'Монтаж до 15 сек, ракурсы, субтитры, формат WB/Ozon, до 2 правок', 
+        type: 'video',
+        image: 'images/services/cover-4.jpg'
+    },
+    { 
+        id: 5, 
+        name: 'Рич-контент (1 блок)', 
+        price: 3500, 
+        desc: 'Структура, текст+визуал, адаптивная верстка, до 2 правок', 
+        type: 'rich',
+        image: 'images/services/cover-5.jpg'
+    },
+    { 
+        id: 6, 
+        name: 'Аудит карточки', 
+        price: 3000, 
+        desc: 'Анализ оформления, читаемости, требований, рекомендации, отчет', 
+        type: 'audit',
+        image: 'images/services/cover-6.jpg'
+    },
+    { 
+        id: 7, 
+        name: 'Пакет «Старт»', 
+        price: 8000, 
+        desc: '1 карточка полностью: обложка, 3 слайда, описание, рич-контент', 
+        type: 'complex', 
+        isPackage: true,
+        image: 'images/services/cover-7.jpg'
+    },
+    { 
+        id: 8, 
+        name: 'Пакет «Оптима»', 
+        price: 35000, 
+        desc: '5 карточек: обложки, 15 слайдов, описания, рич-контент, единый стиль', 
+        type: 'complex', 
+        isPackage: true,
+        image: 'images/services/cover-8.jpg'
+    },
+    { 
+        id: 9, 
+        name: 'Пакет «Масштаб»', 
+        price: 58000, 
+        desc: '8 карточек: полный цикл + 2 видеообложки, брендбук, приоритет, 5 дней', 
+        type: 'complex', 
+        isPackage: true,
+        image: 'images/services/cover-9.jpg'
+    }
 ];
 
-// Данные портфолио (заглушки)
+// Данные портфолио (замените пути на свои файлы)
 const portfolioData = {
     covers: [
         { img: 'images/portfolio/covers/1.jpg', title: 'Косметика' },
@@ -72,16 +115,20 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 function renderServices() {
     const container = document.getElementById('services-container');
     if (!container) return;
+    
     container.innerHTML = services.map(s => {
         const inCart = cart.some(i => i.id === s.id);
         const portfolioLink = s.isPackage ? 'portfolio.html#port-complex' : `portfolio.html#port-${s.type}`;
         const btnText = inCart ? 'В корзине' : 'В корзину';
         const btnClass = inCart ? 'btn-add added' : 'btn-add';
+        const imageHtml = s.image 
+            ? `<img src="${s.image}" alt="${s.name}" onerror="this.parentElement.innerHTML='Превью'">` 
+            : 'Превью';
         
         return `
             <div class="service-card" id="service-${s.id}">
                 <div class="card-visual">
-                    ${s.image ? `<img src="${s.image}" alt="${s.name}">` : 'Превью'}
+                    ${imageHtml}
                 </div>
                 <div class="card-body">
                     <div class="card-title">${s.name}</div>
@@ -140,7 +187,7 @@ async function checkout() {
 
     const total = cart.reduce((s, i) => s + i.price, 0);
     const msg = `<b>Заказ с сайта КартПлейс</b>\n\n` + 
-                cart.map(i => `️ ${i.name} — ${i.price} ₽`).join('\n') + 
+                cart.map(i => `▫️ ${i.name} — ${i.price} ₽`).join('\n') + 
                 `\n\n<b>Итого: ${total} ₽</b>`;
 
     try {
@@ -156,7 +203,8 @@ async function checkout() {
         renderServices();
         updateCartUI();
     } catch (e) {
-        alert('Ошибка отправки. Проверьте консоль (F12) и настройки бота.');
+        console.error(e);
+        alert('Ошибка отправки. Проверьте консоль (F12).');
     } finally {
         btn.textContent = 'Оформить в Telegram';
         btn.disabled = false;
@@ -196,11 +244,21 @@ function renderPortfolio() {
     Object.keys(portfolioData).forEach(key => {
         const grid = document.getElementById(`grid-${key}`);
         if (!grid) return;
-        grid.innerHTML = portfolioData[key].map(item => `
-            <div class="portfolio-item">
-                <img src="${item.img}" alt="${item.title}" loading="lazy">
-            </div>
-        `).join('');
+        grid.innerHTML = portfolioData[key].map(item => {
+            // Поддержка видео в портфолио
+            if (key === 'video' && item.img.endsWith('.mp4')) {
+                return `
+                    <div class="portfolio-item">
+                        <video src="${item.img}" alt="${item.title}" muted loop playsinline loading="lazy"></video>
+                    </div>
+                `;
+            }
+            return `
+                <div class="portfolio-item">
+                    <img src="${item.img}" alt="${item.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;background:#eee;color:#666\'>${item.title}</div>'">
+                </div>
+            `;
+        }).join('');
     });
 }
 
