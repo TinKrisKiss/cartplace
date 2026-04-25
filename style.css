@@ -55,13 +55,16 @@ ul { list-style: none; }
 .service-card {
     background: var(--white); border-radius: var(--radius); overflow: hidden;
     box-shadow: var(--shadow); display: flex; flex-direction: column;
-    height: 100%;
+    height: 100%; cursor: pointer; transition: transform 0.2s;
 }
+.service-card:hover { transform: translateY(-5px); }
+
 /* ФОРМАТ 3:4 */
 .card-visual {
     aspect-ratio: 3/4; 
     background: #757575; 
     position: relative;
+    overflow: hidden;
 }
 .card-visual img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -85,6 +88,37 @@ ul { list-style: none; }
 }
 .btn-details:hover { border-color: var(--text-main); color: var(--text-main); }
 
+/* Divider after services */
+.services-divider {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+}
+.services-divider hr {
+    border: none;
+    height: 2px;
+    background: var(--struct);
+}
+
+/* Portfolio Banner Section */
+.portfolio-banner-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+.portfolio-banner {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.portfolio-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Contacts */
 .contacts-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
 .contacts-section h2 { text-align: center; margin-bottom: 32px; }
@@ -105,7 +139,7 @@ ul { list-style: none; }
 .portfolio-section { margin-bottom: 60px; scroll-margin-top: 80px; }
 .portfolio-section h2 { margin-bottom: 24px; font-size: 28px; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-.portfolio-item { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 3/4; }
+.portfolio-item { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 3/4; cursor: pointer; }
 .portfolio-item img, .portfolio-item video { width: 100%; height: 100%; object-fit: cover; }
 
 /* Modal */
@@ -122,56 +156,103 @@ ul { list-style: none; }
 #checkout-btn { width: 100%; margin-top: 16px; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
 #checkout-btn:disabled { background: #ccc; cursor: not-allowed; }
 
-/* === НОВЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ УСЛУГИ === */
+/* Image Lightbox Modal */
+.lightbox-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.9); z-index: 400; display: none;
+    justify-content: center; align-items: center;
+}
+.lightbox-modal.open { display: flex; }
+.lightbox-content { max-width: 90%; max-height: 90%; }
+.lightbox-content img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+.lightbox-close {
+    position: absolute; top: 20px; right: 40px; color: #fff; 
+    font-size: 40px; cursor: pointer;
+}
 
-.service-detail-container { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+/* === СТИЛИ ДЛЯ СТРАНИЦЫ УСЛУГИ === */
 
-.detail-header { margin-bottom: 40px; }
-.detail-title { font-size: 36px; font-weight: 700; margin-bottom: 10px; }
-.detail-price { font-size: 32px; color: var(--accent); font-weight: 700; margin-bottom: 20px; }
-.detail-desc { color: var(--text-sec); font-size: 18px; line-height: 1.6; margin-bottom: 30px; }
+.service-detail-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
 
-/* Формат 3:4 для главного изображения */
-.detail-image-wrapper {
-    width: 100%;
-    aspect-ratio: 3/4; /* 3:4 */
-    border-radius: 16px;
-    overflow: hidden;
+.detail-back-link { display: inline-block; margin-bottom: 30px; color: var(--text-sec); }
+
+/* Новая сетка: слева изображение, справа описание и инфо */
+.detail-top-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    align-items: start;
     margin-bottom: 40px;
+}
+
+/* Уменьшенное изображение 3:4 */
+.detail-image-small {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    overflow: hidden;
     background-color: #ddd;
     box-shadow: var(--shadow);
 }
-.detail-image {
+.detail-image-small img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.detail-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start; }
-
-.detail-section { margin-bottom: 30px; }
-.detail-section h3 { font-size: 20px; margin-bottom: 15px; color: var(--text-main); }
-.detail-section ul { list-style: none; padding: 0; }
-.detail-section li { 
-    padding: 8px 0; border-bottom: 1px solid #eee; color: var(--text-sec);
-    display: flex; align-items: center;
-}
-.detail-section li::before {
-    content: "•"; color: var(--accent); margin-right: 10px; font-weight: bold;
+.detail-info-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.info-block { background: var(--white); padding: 25px; border-radius: 12px; box-shadow: var(--shadow); position: sticky; top: 80px; }
-.info-item { margin-bottom: 20px; }
-.info-label { font-size: 12px; text-transform: uppercase; color: var(--text-sec); margin-bottom: 6px; letter-spacing: 0.5px; }
+.detail-title { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+.detail-desc { color: var(--text-sec); font-size: 16px; line-height: 1.6; }
+
+/* Блок "Сроки и Что вы получите" с ценой сверху */
+.detail-info-block {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+}
+.detail-price-in-block {
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+.info-item { margin-bottom: 15px; }
+.info-label { font-size: 12px; text-transform: uppercase; color: var(--text-sec); margin-bottom: 4px; letter-spacing: 0.5px; }
 .info-value { font-weight: 600; font-size: 16px; }
 
-.btn-action-block { width: 100%; margin-top: 10px; padding: 14px; font-size: 16px; }
+/* Что входит в услугу - без разделительных линий */
+.detail-section { margin-bottom: 40px; }
+.detail-section h3 { font-size: 20px; margin-bottom: 20px; color: var(--text-main); }
+.detail-section ul { list-style: none; padding: 0; }
+.detail-section li { 
+    padding: 6px 0; 
+    color: var(--text-sec);
+    display: flex; 
+    align-items: center;
+    font-size: 15px;
+}
+.detail-section li::before {
+    content: "•"; 
+    color: var(--accent); 
+    margin-right: 12px; 
+    font-weight: bold;
+    font-size: 18px;
+}
 
-/* Сетка примеров работ на странице услуги */
+/* Примеры работ - 4 кликабельных изображения */
 .service-examples-title { font-size: 20px; margin: 40px 0 20px; font-weight: 600; }
 .service-examples-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     margin-bottom: 50px;
 }
@@ -180,14 +261,32 @@ ul { list-style: none; }
     border-radius: 12px;
     overflow: hidden;
     background: #eee;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.service-example-item:hover {
+    transform: scale(1.03);
 }
 .service-example-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
 }
-.service-example-item:hover img { transform: scale(1.05); }
+
+/* Кнопка заказа */
+.btn-order-service {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.btn-order-service.added { background: var(--struct); }
 
 /* Нижняя ссылка */
 .all-services-link {
@@ -201,14 +300,14 @@ ul { list-style: none; }
 }
 .all-services-link:hover { color: var(--accent); border-color: var(--accent); }
 
-@media (max-width: 768px) {
-    .detail-grid { grid-template-columns: 1fr; }
-    .service-examples-grid { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+    .detail-top-grid { grid-template-columns: 1fr; }
+    .detail-image-small { max-width: 300px; margin: 0 auto; }
+    .service-examples-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
     .hero h1 { font-size: 32px; }
     .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
-    .detail-grid { grid-template-columns: 1fr; }
-    .portfolio-nav ul { gap: 16px; }
+    .service-examples-grid { grid-template-columns: 1fr; }
 }

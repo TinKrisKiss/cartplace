@@ -71,6 +71,18 @@
         <!-- Заполняется через JS -->
     </main>
 
+    <!-- Разделитель -->
+    <div class="services-divider">
+        <hr>
+    </div>
+
+    <!-- Портфолио баннер -->
+    <section class="portfolio-banner-section">
+        <div class="portfolio-banner">
+            <img src="images/portfolio-banner.jpg" alt="Портфолио КартПлейс" onerror="this.parentElement.style.display='none'">
+        </div>
+    </section>
+
     <!-- Контакты -->
     <section class="contacts-section" id="contacts">
         <h2>Контакты</h2>
@@ -84,10 +96,6 @@
                 <h3>Email</h3>
                 <p>email@example.com</p>
                 <a href="mailto:email@example.com" class="btn-contact">Отправить письмо</a>
-            </div>
-            <div class="contact-card">
-                <h3>Режим работы</h3>
-                <p>Пн–Пт: 10:00–19:00<br>Сб–Вс: выходной</p>
             </div>
         </div>
     </section>
@@ -107,6 +115,14 @@
                 </div>
                 <button class="btn-checkout" onclick="checkout()" id="checkout-btn">Оформить в Telegram</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Lightbox для просмотра изображений -->
+    <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Увеличенное изображение">
         </div>
     </div>
 

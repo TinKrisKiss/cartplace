@@ -2,14 +2,12 @@
 const TG_BOT_TOKEN = '8653900483:AAGjQ5qhrX3odmnLQIndK5THOVPKWaxrcGY'; 
 const TG_CHAT_ID = '748296626';
 
-// === ОБЩИЙ ПУЛ ПРИМЕРОВ РАБОТ (Для страницы услуги) ===
-// Здесь собраны все картинки, из которых скрипт будет брать 3 штуки для превью
+// === ОБЩИЙ ПУЛ ПРИМЕРОВ РАБОТ ===
 const portfolioPool = [
     'images/portfolio/covers/1.jpg', 'images/portfolio/covers/2.jpg',
     'images/portfolio/infographics/1.jpg', 'images/portfolio/infographics/2.jpg',
     'images/portfolio/rich/1.jpg', 'images/portfolio/rich/2.jpg',
-    'images/portfolio/video/1.jpg', 'images/portfolio/video/2.jpg',
-    'images/portfolio/complex/1.jpg'
+    'images/portfolio/video/1.jpg', 'images/portfolio/video/2.jpg'
 ];
 
 // === БАЗА ДАННЫХ УСЛУГ ===
@@ -107,7 +105,7 @@ const portfolioData = {
     ]
 };
 
-// === ОБЩИЕ ФУНКЦИИ (Корзина и Меню) ===
+// === ОБЩИЕ ФУНКЦИИ ===
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function updateCartUI() {
@@ -190,7 +188,24 @@ function toggleCart(id) {
     updateCartUI();
 }
 
-// === ЛОГИКА ГЛАВНОЙ СТРАНИЦЫ (index.html) ===
+// Открытие lightbox для изображений
+function openLightbox(imgSrc) {
+    const lightbox = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (lightbox && lightboxImg) {
+        lightboxImg.src = imgSrc;
+        lightbox.classList.add('open');
+    }
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox-modal');
+    if (lightbox) {
+        lightbox.classList.remove('open');
+    }
+}
+
+// === ЛОГИКА ГЛАВНОЙ СТРАНИЦЫ ===
 function initIndexPage() {
     const container = document.getElementById('services-container');
     if (!container) return;
@@ -204,12 +219,12 @@ function initIndexPage() {
             : 'Нет фото';
         
         return `
-            <div class="service-card" id="service-${s.id}">
+            <div class="service-card" onclick="window.location.href='service.html?id=${s.id}'">
                 <div class="card-visual">${imageHtml}</div>
                 <div class="card-body">
                     <div class="card-title">${s.name}</div>
                     <div class="card-price">${s.price.toLocaleString()} ₽</div>
-                    <div class="card-actions">
+                    <div class="card-actions" onclick="event.stopPropagation()">
                         <button class="${btnClass}" onclick="toggleCart(${s.id})">${btnText}</button>
                         <a href="service.html?id=${s.id}" class="btn-details">Подробнее</a>
                     </div>
@@ -219,7 +234,7 @@ function initIndexPage() {
     }).join('');
 }
 
-// === ЛОГИКА СТРАНИЦЫ УСЛУГИ (service.html) ===
+// === ЛОГИКА СТРАНИЦЫ УСЛУГИ ===
 function renderServicePage() {
     const container = document.getElementById('service-detail-content');
     if (!container) return;
@@ -235,46 +250,33 @@ function renderServicePage() {
 
     const inCart = cart.some(i => i.id === id);
     const btnText = inCart ? 'Уже в корзине' : 'Заказать услугу';
-    const btnClass = inCart ? 'btn-add added' : 'btn-add';
+    const btnClass = inCart ? 'btn-order-service added' : 'btn-order-service';
 
-    // Берем 3 примера работ из общего пула (с проверкой, чтобы не было undefined)
-    const examplesHtml = portfolioPool.slice(0, 3).map(imgPath => `
-        <div class="service-example-item">
-            <img src="${imgPath}" alt="Пример работы" onerror="this.style.display='none'">
+    // Берем 4 примера работ
+    const examplesHtml = portfolioPool.slice(0, 4).map((imgPath, index) => `
+        <div class="service-example-item" onclick="openLightbox('${imgPath}')">
+            <img src="${imgPath}" alt="Пример работы ${index + 1}" onerror="this.style.display='none'">
         </div>
     `).join('');
 
     container.innerHTML = `
-        <div class="detail-header">
-            <a href="index.html" style="display:inline-block; margin-bottom:20px; color:var(--text-sec);">← Все услуги</a>
-            <h1 class="detail-title">${service.name}</h1>
-            <div class="detail-price">${service.price.toLocaleString()} ₽</div>
-            <p class="detail-desc">${service.description}</p>
-        </div>
-
-        <!-- Главное изображение 3:4 -->
-        <div class="detail-image-wrapper">
-            <img src="${service.image || ''}" alt="${service.name}" class="detail-image" onerror="this.parentElement.style.display='none'">
-        </div>
-
-        <div class="detail-grid">
-            <div class="detail-main">
-                <div class="detail-section">
-                    <h3>Что входит в услугу:</h3>
-                    <ul>
-                        ${service.features.map(f => `<li>${f}</li>`).join('')}
-                    </ul>
-                </div>
-
-                <!-- 3 Примера работ -->
-                <div class="service-examples-title">Примеры работ:</div>
-                <div class="service-examples-grid">
-                    ${examplesHtml}
-                </div>
+        <a href="index.html" class="detail-back-link">← Все услуги</a>
+        
+        <div class="detail-top-grid">
+            <!-- Слева: уменьшенное изображение 3:4 -->
+            <div class="detail-image-small">
+                <img src="${service.image || ''}" alt="${service.name}" onerror="this.parentElement.style.display='none'">
             </div>
-
-            <div class="detail-sidebar">
-                <div class="info-block">
+            
+            <!-- Справа: описание и блок с ценой/сроками -->
+            <div class="detail-info-right">
+                <div>
+                    <h1 class="detail-title">${service.name}</h1>
+                    <p class="detail-desc">${service.description}</p>
+                </div>
+                
+                <div class="detail-info-block">
+                    <div class="detail-price-in-block">${service.price.toLocaleString()} ₽</div>
                     <div class="info-item">
                         <div class="info-label">Срок выполнения</div>
                         <div class="info-value">${service.timeline}</div>
@@ -283,9 +285,23 @@ function renderServicePage() {
                         <div class="info-label">Что вы получите</div>
                         <div class="info-value">${service.deliverable}</div>
                     </div>
-                    <button class="btn-add btn-action-block" onclick="toggleCart(${service.id})">${btnText}</button>
+                    <button class="${btnClass}" onclick="toggleCart(${service.id})">${btnText}</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Что входит в услугу (под изображением) -->
+        <div class="detail-section">
+            <h3>Что входит в услугу:</h3>
+            <ul>
+                ${service.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+        </div>
+
+        <!-- 4 Примера работ (кликабельные) -->
+        <div class="service-examples-title">Примеры работ:</div>
+        <div class="service-examples-grid">
+            ${examplesHtml}
         </div>
 
         <!-- Ссылка "Все услуги" внизу -->
@@ -304,7 +320,7 @@ function renderPortfolio() {
             if (key === 'video' && item.img.endsWith('.mp4')) {
                 return `<div class="portfolio-item"><video src="${item.img}" muted loop playsinline loading="lazy"></video></div>`;
             }
-            return `<div class="portfolio-item"><img src="${item.img}" alt="${item.title}" loading="lazy"></div>`;
+            return `<div class="portfolio-item" onclick="openLightbox('${item.img}')"><img src="${item.img}" alt="${item.title}" loading="lazy"></div>`;
         }).join('');
     });
 }
