@@ -14,7 +14,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-/* Header */
+/* === HEADER === */
 .header {
     display: flex; justify-content: space-between; align-items: center;
     padding: 16px 24px; background: var(--bg); position: sticky; top: 0; z-index: 100;
@@ -24,7 +24,7 @@ ul { list-style: none; }
 .menu-trigger .back-arrow { margin-right: 8px; font-size: 18px; }
 #header-total { color: var(--accent); font-weight: 700; }
 
-/* Menu Overlay */
+/* === MENU OVERLAY === */
 .menu-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.4); z-index: 200; display: none;
@@ -41,13 +41,24 @@ ul { list-style: none; }
 .menu-section a { font-weight: 500; padding: 8px 0; border-bottom: 1px solid #eee; transition: 0.2s; }
 .menu-section a:hover { color: var(--accent); padding-left: 8px; }
 
-/* Hero */
+/* === HERO === */
 .hero { text-align: center; padding: 60px 20px 40px; max-width: 800px; margin: 0 auto; }
-.hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 16px; }
-.subtitle { color: var(--text-sec); font-size: 16px; }
+
+.main-title {
+    font-size: 84px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.title-kart { color: #2b2b2b; }
+.title-place { color: #b8442c; }
+
+.subtitle { color: var(--text-sec); font-size: 16px; line-height: 1.6; }
 .subtitle strong { color: var(--text-main); }
 
-/* Services Grid */
+/* === SERVICES GRID === */
 .services-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 24px; max-width: 1200px; margin: 0 auto; padding: 20px;
@@ -59,7 +70,6 @@ ul { list-style: none; }
 }
 .service-card:hover { transform: translateY(-5px); }
 
-/* ФОРМАТ 3:4 */
 .card-visual {
     aspect-ratio: 3/4; 
     background: #757575; 
@@ -88,7 +98,7 @@ ul { list-style: none; }
 }
 .btn-details:hover { border-color: var(--text-main); color: var(--text-main); }
 
-/* Divider after services */
+/* === DIVIDER === */
 .services-divider {
     max-width: 1200px;
     margin: 40px auto 0;
@@ -100,12 +110,28 @@ ul { list-style: none; }
     background: var(--struct);
 }
 
-/* Portfolio Banner Section */
+/* === PORTFOLIO BANNER === */
 .portfolio-banner-section {
     max-width: 1200px;
     margin: 60px auto;
     padding: 0 20px;
 }
+
+.portfolio-subtitle {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-main);
+}
+
+.portfolio-banner-link {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.portfolio-banner-link:hover { transform: scale(1.02); }
+
 .portfolio-banner {
     width: 100%;
     height: auto;
@@ -119,7 +145,61 @@ ul { list-style: none; }
     display: block;
 }
 
-/* Contacts */
+/* === FAQ SECTION === */
+.faq-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-main);
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 18px;
+    color: var(--text-sec);
+    max-width: 800px;
+    margin: 0 auto 50px;
+    line-height: 1.6;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 24px;
+}
+
+.faq-item {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 3px solid var(--struct);
+}
+
+.faq-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.faq-item p {
+    color: var(--text-sec);
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.faq-item p br { margin-bottom: 8px; }
+
+/* === CONTACTS === */
 .contacts-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
 .contacts-section h2 { text-align: center; margin-bottom: 32px; }
 .contacts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
@@ -127,7 +207,7 @@ ul { list-style: none; }
 .contact-card h3 { margin-bottom: 8px; }
 .btn-contact { display: inline-block; margin-top: 12px; padding: 10px 20px; background: var(--accent); color: #fff; border-radius: 6px; font-weight: 500; }
 
-/* Portfolio Page */
+/* === PORTFOLIO PAGE === */
 .portfolio-nav {
     position: sticky; top: 0; background: var(--white); z-index: 90;
     border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap;
@@ -142,7 +222,7 @@ ul { list-style: none; }
 .portfolio-item { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 3/4; cursor: pointer; }
 .portfolio-item img, .portfolio-item video { width: 100%; height: 100%; object-fit: cover; }
 
-/* Modal */
+/* === MODAL === */
 .modal {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
     display: none; justify-content: center; align-items: center; z-index: 300;
@@ -156,7 +236,7 @@ ul { list-style: none; }
 #checkout-btn { width: 100%; margin-top: 16px; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
 #checkout-btn:disabled { background: #ccc; cursor: not-allowed; }
 
-/* Image Lightbox Modal */
+/* === LIGHTBOX === */
 .lightbox-modal {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0,0,0,0.9); z-index: 400; display: none;
@@ -170,13 +250,10 @@ ul { list-style: none; }
     font-size: 40px; cursor: pointer;
 }
 
-/* === СТИЛИ ДЛЯ СТРАНИЦЫ УСЛУГИ === */
-
+/* === SERVICE DETAIL PAGE === */
 .service-detail-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
-
 .detail-back-link { display: inline-block; margin-bottom: 30px; color: var(--text-sec); }
 
-/* Новая сетка: слева изображение, справа описание и инфо */
 .detail-top-grid {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -185,7 +262,6 @@ ul { list-style: none; }
     margin-bottom: 40px;
 }
 
-/* Уменьшенное изображение 3:4 */
 .detail-image-small {
     width: 100%;
     aspect-ratio: 3/4;
@@ -200,16 +276,11 @@ ul { list-style: none; }
     object-fit: cover;
 }
 
-.detail-info-right {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+.detail-info-right { display: flex; flex-direction: column; gap: 20px; }
 
 .detail-title { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
 .detail-desc { color: var(--text-sec); font-size: 16px; line-height: 1.6; }
 
-/* Блок "Сроки и Что вы получите" с ценой сверху */
 .detail-info-block {
     background: var(--white);
     padding: 25px;
@@ -229,7 +300,6 @@ ul { list-style: none; }
 .info-label { font-size: 12px; text-transform: uppercase; color: var(--text-sec); margin-bottom: 4px; letter-spacing: 0.5px; }
 .info-value { font-weight: 600; font-size: 16px; }
 
-/* Что входит в услугу - без разделительных линий */
 .detail-section { margin-bottom: 40px; }
 .detail-section h3 { font-size: 20px; margin-bottom: 20px; color: var(--text-main); }
 .detail-section ul { list-style: none; padding: 0; }
@@ -248,7 +318,6 @@ ul { list-style: none; }
     font-size: 18px;
 }
 
-/* Примеры работ - 4 кликабельных изображения */
 .service-examples-title { font-size: 20px; margin: 40px 0 20px; font-weight: 600; }
 .service-examples-grid {
     display: grid;
@@ -264,16 +333,9 @@ ul { list-style: none; }
     cursor: pointer;
     transition: transform 0.2s;
 }
-.service-example-item:hover {
-    transform: scale(1.03);
-}
-.service-example-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.service-example-item:hover { transform: scale(1.03); }
+.service-example-item img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Кнопка заказа */
 .btn-order-service {
     width: 100%;
     padding: 16px;
@@ -288,7 +350,6 @@ ul { list-style: none; }
 }
 .btn-order-service.added { background: var(--struct); }
 
-/* Нижняя ссылка */
 .all-services-link {
     display: inline-block;
     margin-top: 20px;
@@ -300,6 +361,7 @@ ul { list-style: none; }
 }
 .all-services-link:hover { color: var(--accent); border-color: var(--accent); }
 
+/* === RESPONSIVE === */
 @media (max-width: 900px) {
     .detail-top-grid { grid-template-columns: 1fr; }
     .detail-image-small { max-width: 300px; margin: 0 auto; }
@@ -307,7 +369,16 @@ ul { list-style: none; }
 }
 
 @media (max-width: 768px) {
+    .main-title { font-size: 48px; }
     .hero h1 { font-size: 32px; }
     .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
     .service-examples-grid { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .section-title { font-size: 28px; }
+    .section-intro { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+    .main-title { font-size: 36px; }
+    .portfolio-subtitle { font-size: 24px; }
 }
