@@ -21,14 +21,13 @@
         </div>
     </header>
 
-    <!-- Навигация портфолио -->
+    <!-- Навигация портфолио (Убран раздел Комплексное) -->
     <nav class="portfolio-nav" id="portfolio-nav">
         <ul>
             <li><a href="#port-covers" class="nav-link active">Обложки</a></li>
             <li><a href="#port-infographics" class="nav-link">Инфографика</a></li>
             <li><a href="#port-rich" class="nav-link">Рич-контент</a></li>
             <li><a href="#port-video" class="nav-link">Видеообложки</a></li>
-            <li><a href="#port-complex" class="nav-link">Комплексное</a></li>
         </ul>
     </nav>
 
@@ -53,6 +52,7 @@
             <div class="portfolio-grid" id="grid-video"></div>
         </section>
 
+        <!-- Секция "Комплексное" удалена временно -->
     </main>
 
     <div class="modal" id="cart-modal">
@@ -69,6 +69,14 @@
                 </div>
                 <button class="btn-checkout" onclick="checkout()" id="checkout-btn">Оформить в Telegram</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Lightbox для просмотра изображений -->
+    <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Увеличенное изображение">
         </div>
     </div>
 

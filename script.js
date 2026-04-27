@@ -77,7 +77,9 @@ const services = [
     }
 ];
 
-// Данные портфолио (для страницы portfolio.html)
+// ... (начало файла без изменений) ...
+
+// Данные портфолио (Удален раздел complex)
 const portfolioData = {
     covers: [
         { img: 'images/portfolio/covers/1.jpg', title: 'Косметика' },
@@ -97,11 +99,6 @@ const portfolioData = {
     video: [
         { img: 'images/portfolio/video/1.jpg', title: 'Динамика' },
         { img: 'images/portfolio/video/2.jpg', title: 'Обзор' }
-    ],
-    complex: [
-        { img: 'images/portfolio/complex/1.jpg', title: 'Пакет Старт' },
-        { img: 'images/portfolio/complex/2.jpg', title: 'Пакет Оптима' },
-        { img: 'images/portfolio/complex/3.jpg', title: 'Пакет Масштаб' }
     ]
 };
 
